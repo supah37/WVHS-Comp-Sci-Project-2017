@@ -1,0 +1,59 @@
+public class Employee
+{
+    public String user;
+    public String pass;
+    public String fname;
+    public String lname;
+    public String id;
+    public double hour;
+    
+    public Employee(String username, String password, String firstname, String lastname, String idnumber, double hourlywage)
+    {
+        user = username;
+        pass = password;
+        fname = firstname;
+        lname = lastname;
+        id = idnumber;
+        hour = hourlywage;
+    }
+    public String getUser()
+    {
+    	return user;
+    }
+    public String getPassword()
+    {
+    	return pass;
+    }
+    public String getFirstname()
+    {
+        return fname;
+    }
+    public String getLastname()
+    {
+    	return lname;
+    }
+    public String getID()
+    {
+        return id;
+    }
+    public double getWage()
+    {
+        return hour;
+    }
+    public void setFirstname(String n)
+    {
+        fname = n;
+    }
+    public void setLastname(String n)
+    {
+        lname = n;
+    }
+    public void setID(String n)
+    {
+        id = n;
+    }
+    public void setWage(double n)
+    {
+        hour = n;
+    }
+}
