@@ -1,0 +1,265 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+public class Tester
+{
+    public static void main(String[] args)
+    {
+    	boolean done = true;
+    	boolean valid = false;
+    	boolean lockT = true;
+    	boolean made = true;
+    	boolean checkT = true;
+    	boolean checkF = true;
+    	int n = 0;
+    	Scanner sc = new Scanner(System.in);
+    	ArrayList<Employee> al = new ArrayList<Employee>();
+    	ArrayList<Admin> ad = new ArrayList<Admin>();
+    	ArrayList<Associate> as = new ArrayList<Associate>();
+    	System.out.println("Do you want to make an Admin account?");
+    	String choice = sc.next();
+    	if(choice.equalsIgnoreCase("yes"))
+    	{
+    		System.out.println("input first name");
+   			String fname = sc.next();
+   			System.out.println("input last name");
+   			String lname = sc.next();
+   			System.out.println("input id number");
+   			String id = sc.next();
+   			double w = 0;
+   			boolean except = true;
+   			do
+   			{
+   				try
+   				{
+   					Scanner ex = new Scanner(System.in);
+   					System.out.println("input wage");
+   					w = ex.nextDouble();
+   					except = false;
+    			}
+    			catch(InputMismatchException e)
+    			{
+    				System.out.println("enter a number");
+   				}
+    		}
+    		while(except);
+    		System.out.println("create username");
+    		String user = sc.next();
+    		System.out.println("create password");
+    		String pass = sc.next();
+    		System.out.println("allow other users assoicate accounts?");
+    		choice = sc.next();
+    		boolean lock = false;
+    		if(choice.equalsIgnoreCase("yes"))
+    		{
+    			lock = true;
+    		}
+    		System.out.println("Do you want to make a passcode in order to make associate accounts?");
+    		choice = sc.next();
+    		String asPass = null;
+    		if(choice.equalsIgnoreCase("yes"))
+    		{
+    			System.out.println("Enter your desired passcode");
+    			asPass = sc.next();
+    		}
+    		System.out.println("Allow users to set their own wages?");
+    		choice = sc.next();
+    		boolean allow = true;
+    		if(choice.equalsIgnoreCase("yes"))
+    		{
+    			allow = true;
+    		}
+			Admin admin = new Admin(user, pass, fname, lname, id, w, lock, asPass, allow);
+			ad.add(admin);
+    	}
+    	while(done)
+    	{
+    		System.out.println("type c to create, l to login");
+    		choice = sc.next();
+    		if(choice.equalsIgnoreCase("c"))
+    		{
+    			lockT = ad.get(0).getAllowed();
+    			made = true;
+    			while(lockT)
+    			{
+    				checkT = true;
+    				while(checkT)
+    				{
+    					checkF = true;
+    					if(ad.get(0).getAccountPass()==null)
+    					{
+    						checkT = false;
+    					}
+    					while(checkF)
+    					{
+    						System.out.println("do you want to make an Associate account?");
+    						choice = sc.next();
+    						if(choice.equalsIgnoreCase("yes"))
+    						{
+    							System.out.println("enter associate passcode");
+    							String alPass = sc.next();
+    							if(alPass.equals(ad.get(0).getAccountPass()))
+    							{
+    								checkT = false;
+    								checkF = false;
+    							}
+    							else
+    							{
+    								System.out.println("incorrect passcode");
+    							}
+    						}
+    						else if(choice.equalsIgnoreCase("no"))
+    						{
+    							lockT = false;
+    							checkT = false;
+    							checkF = false;
+    						}
+    						else
+    						{
+    							System.out.println("Please enter yes or no");
+    						}
+    					}
+    				}
+    				System.out.println("input first name");
+   		 			String fname = sc.next();
+   		 			System.out.println("input last name");
+    				String lname = sc.next();
+    				System.out.println("input id number");
+    				String id = sc.next();
+    				double w = 0;
+    				if(ad.get(0).getAllowedWage()==true)
+    				{
+    					boolean except = true;
+    					do
+    					{
+   							try
+   							{
+   								Scanner ex = new Scanner(System.in);
+    							System.out.println("input wage");
+   								w = ex.nextDouble();
+   								except = false;
+   							}
+    						catch(InputMismatchException e)
+    						{
+    							System.out.println("enter a number");
+    						}
+    					}
+   						while(except);
+    				}
+   					System.out.println("create username");
+   					String user = sc.next();
+   					boolean check = true;
+   					while(check)
+   					{
+   						for(int i = 0; i <= al.size()-1; i++)
+   						{
+ 							if(user.equals(al.get(i).getUser())||user.equals(as.get(i).getUser())||user.equals(ad.get(i).getUser()))
+ 							{
+ 								System.out.println("username already in use, enter a different username");
+    							user = sc.next();
+ 							}
+ 							else
+ 							{
+								check = false;
+    							i = al.size();
+ 							}
+   						}
+    				}
+    				System.out.println("create password");
+    				String pass = sc.next();
+    				Associate associate = new Associate(user, pass, fname, lname, id, w);
+    				as.add(associate);
+    				made = false;
+    				lockT = false;
+    			}
+    			while(made)
+    			{
+    				System.out.println("input first name");
+    				String fname = sc.next();
+    				System.out.println("input last name");
+    				String lname = sc.next();
+    				System.out.println("input id number");
+    				String id = sc.next();
+    				double w = 0;
+    				if(ad.get(0).getAllowedWage()==true)
+   					{
+   						boolean except = true;
+   						do
+   						{
+   							try
+   							{
+   								Scanner ex = new Scanner(System.in);
+    							System.out.println("input wage");
+   								w = ex.nextDouble();
+   								except = false;
+   							}
+    						catch(InputMismatchException e)
+    						{
+    							System.out.println("enter a number");
+    						}
+    					}
+   						while(except);
+    				}
+    				System.out.println("create username");
+    				String user = sc.next();
+    				boolean check = true;
+    				while(check)
+    				{
+   						for(int i = 0; i <= al.size()-1; i++)
+   						{
+ 							if(user.equals(al.get(i).getUser())||user.equals(as.get(i).getUser())||user.equals(ad.get(i).getUser()))
+ 							{
+ 								System.out.println("username already in use, enter a different username");
+    							user = sc.next();
+ 							}
+ 							else
+ 							{
+								check = false;
+    							i = al.size();
+ 							}
+   						}
+    				}
+    			}
+    		}
+			else if(choice.equalsIgnoreCase("l"))
+			{
+				if(al.size() == 0)
+				{
+					System.out.println("no objects made");
+				}
+				else
+				{
+    				System.out.println("input username");
+    				String inputU = sc.next();
+    				System.out.println("input password");
+    				String inputP = sc.next();
+    				for(int i = 0; i <= al.size()-1; i++)
+    				{
+    					if(inputU.equals(al.get(i).getUser())||inputU.equals(as.get(i).getUser())||inputU.equals(ad.get(i).getUser()))
+    					{
+    						if(inputP.equals(al.get(i).getPassword())||inputP.equals(as.get(i).getPassword())||inputP.equals(ad.get(i).getPassword()))
+    						{
+    							n = i;
+    							valid = true;
+    							done = false;
+    						}
+    					}
+    				}
+				}
+			}
+    		else
+    		{
+    			System.out.println("goodbye");
+    		}
+    	}
+    	while(valid)
+    	{
+    		System.out.println("input method");
+    		String method = sc.next();
+    		if(method.equalsIgnoreCase("name"))
+    		{
+    			System.out.println(al.get(n).getFirstname()+al.get(n).getLastname());
+    		}
+    	}
+	}
+}
