@@ -1,0 +1,4 @@
+public interface Wages{
+	
+    void setWage(double hours);
+}
