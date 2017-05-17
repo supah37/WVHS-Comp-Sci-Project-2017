@@ -1,0 +1,7 @@
+public class Associate extends Employee{
+
+    public Associate(String username, String password, String firstname, String lastname, String idnumber, double hourlywage) 
+    {
+    	super(username, password, firstname, lastname, idnumber, hourlywage);
+    }
+}
