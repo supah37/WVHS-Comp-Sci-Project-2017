@@ -1,0 +1,26 @@
+public class Admin extends Associate
+{
+	private boolean al;
+	private String pass;
+	private boolean alWage;
+	
+	public Admin(String username, String password, String firstname, String lastname, String idnumber, double hourlywage, boolean allow, String alPassword, boolean allowWage) 
+    {
+    	super(username, password, firstname, lastname, idnumber, hourlywage);
+    	al = allow;
+    	pass = alPassword;
+    	alWage = allowWage;
+    }
+    public boolean getAllowed()
+    {
+    	return al;
+    }
+    public String getAccountPass()
+    {
+    	return pass;
+    }
+    public boolean getAllowedWage()
+    {
+    	return alWage;
+    }
+}
